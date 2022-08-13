@@ -1,3 +1,13 @@
 .container {
-  
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--background-dark);
+
+  padding: 10px 15px;
+}
+
+.logoPokemon {
+  width: 200px;
+  background-color: white;
 }
