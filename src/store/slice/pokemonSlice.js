@@ -5,7 +5,8 @@ import { reOrderArrayPokemons } from '../../helpers/reorderArrayPokemons';
 const initialState = {
 	allPokemons: [],
 	list: [],
-	detailPokemon: {}
+	detailPokemon: {},
+	favorites: []
 };
 
 export const counterSlice = createSlice({
@@ -29,11 +30,17 @@ export const counterSlice = createSlice({
 				...state,
 				detailPokemon: action.payload,
 			}
+		},
+		addFavoritePokemon: (state, action) => {
+			return {
+				...state,
+				favorites: [...state.favorites, action.payload]
+			}
 		}
 	},
 });
 
-export const { getAllPokemons, getPaginationPokemons, getDetailPokemon } = counterSlice.actions;
+export const { getAllPokemons, getPaginationPokemons, getDetailPokemon, addFavoritePokemon } = counterSlice.actions;
 
 export default counterSlice.reducer;
 

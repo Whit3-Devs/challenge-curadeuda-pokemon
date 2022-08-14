@@ -15,13 +15,11 @@ const CardPokemon = ({ id, name, image, onNavigationDetailPokemon }) => {
 			/>
 			<div className={style.containerButtons}>
 				<h2 className={style.namePokemon}>{capitalizeName(name)}</h2>
-				<div className={style.svgStar}>
-					<StarSvg
-						width={'20px'}
-						height={'20px'}
-						color={'var(--background-lightblue)'}
-					/>
-				</div>
+				<StarSvg
+					width={'0.7rem'}
+					height={'0.7rem'}
+					color={'var(--background-light)'}
+				/>
 			</div>
 		</div>
 	);
