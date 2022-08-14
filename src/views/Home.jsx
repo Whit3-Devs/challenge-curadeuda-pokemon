@@ -2,10 +2,15 @@ import style from '../assets/css/views/Home.module.css';
 import logoPokemon from '../assets/images/logopokemon.png';
 import charactersPokemon from '../assets/images/characters.webp';
 import SearchSvg from '../assets/svg/SearchSvg';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
-  
+  const navigator = useNavigate()
+
+  function onNavigate(){
+    navigator('/pokemons')
+  }
 
 	return (
 		<div className={style.container}>
@@ -25,7 +30,7 @@ const Home = () => {
 					existían 151 pokemones. Actualmente y debido a su popularidad, se
 					puede encontrar mas de 890 pokemones y creciendo.
 				</p>
-				<button className={style.button}>
+				<button className={style.button} onClick={onNavigate}>
 					Buscar Pokemon
 					<SearchSvg width={'20px'} height={'20px'} color={'white'} />
 				</button>

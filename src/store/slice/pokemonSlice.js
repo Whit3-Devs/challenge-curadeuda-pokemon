@@ -1,38 +1,71 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { reOrderArrayPokemons } from '../../helpers/reorderArrayPokemons';
 
 const initialState = {
+	allPokemons: [],
 	list: [],
-  limit: 9,
-  startPage: 0,
+	detailPokemon: {}
 };
 
 export const counterSlice = createSlice({
 	name: 'pokemons',
 	initialState,
 	reducers: {
-		getPokemons: (state, action) => {
+		getAllPokemons: (state, action) => {
 			return {
 				...state,
-				list: action.payload,
+				allPokemons: action.payload,
 			};
 		},
+		getPaginationPokemons: (state, action) => {
+			return {
+				...state,
+				list: action.payload
+			}
+		},
+		getDetailPokemon: (state, action) => {
+			return {
+				...state,
+				detailPokemon: action.payload,
+			}
+		}
 	},
 });
 
-export const { getPokemons } = counterSlice.actions;
+export const { getAllPokemons, getPaginationPokemons, getDetailPokemon } = counterSlice.actions;
 
 export default counterSlice.reducer;
 
-// const apipokemon = 'https://pokeapi.co/api/v2/pokemon?offset=9&limit=9';
-
 export const getPokemonsList = () => {
-  return (dispatch) => {
-    axios
-    .get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=9')
-    .then((res) => {
-      console.log(res.data)
-      return dispatch(getPokemons(res.data.results))
-    })
-  }
+	return dispatch => {
+		axios
+			.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=1154')
+			.then(res => {
+				// console.log(res.data.results.length);
+				return dispatch(getAllPokemons(reOrderArrayPokemons(res.data.results)));
+			});
+	};
+};
+
+
+export const getPokemonsPagination = (pagination = 0) => {
+	return dispatch => {
+		axios
+		.get(`https://pokeapi.co/api/v2/pokemon?offset=${9 * pagination}&limit=9`)
+		.then(res => {
+			return dispatch(getPaginationPokemons(reOrderArrayPokemons(res.data.results)))
+		})
+	}
+}
+
+
+export const fetchDetailPokemon = (id) => {
+	return dispatch => {
+		axios
+		.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+		.then(res => {
+			return dispatch(getDetailPokemon(res.data))
+		})
+	}
 }

@@ -1,19 +1,22 @@
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
 import Home from './views/Home';
+import PokemonDetail from './views/PokemonDetail';
 import PokemonsList from './views/PokemonsList';
-import Pokemon from './views/Pokemon';
-// import Header from './components/Header';
 
 const App = () => {
+	// const location = useLocation();
+	console.log(location);
 	return (
 		<>
-			<Routes>
-				<Route path='/' element={<Home />} />
-
-				<Route path='/pokemons' element={<PokemonsList />}>
-					<Route path=':pokemonId' element={<Pokemon />} />
-				</Route>
-			</Routes>
+			{location.pathname !== '/' && <Header />}
+			<BrowserRouter>
+				<Routes>
+					<Route index path='/' element={<Home />} />
+					<Route path='pokemons' element={<PokemonsList />} />
+					<Route path='pokemons/:pokemonId' element={<PokemonDetail />} />
+				</Routes>
+			</BrowserRouter>
 		</>
 	);
 };

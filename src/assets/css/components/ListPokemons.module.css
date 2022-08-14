@@ -1,0 +1,19 @@
+.containerCards {
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 100%;
+	padding: 10px 10px;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	/* grid-template-rows: auto auto 100px; */
+	grid-gap: 10px;
+
+	/* background-color: var(--background-dark); */
+}
+
+@media (min-width: 600px) {
+	.containerCards {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
